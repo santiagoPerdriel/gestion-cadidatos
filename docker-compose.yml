@@ -1,0 +1,19 @@
+version: '3'
+services:
+  dbMysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gestion
+  backend_api:
+    image: backend-empleado
+    restart: unless-stopped
+    depends_on:
+     - dbMysql
+    ports:
+     - 8080:8080
+  frontapi:
+    image: front-empleado2:latest
+    ports:
+     - 4200:4200
+     - 4201:80   
