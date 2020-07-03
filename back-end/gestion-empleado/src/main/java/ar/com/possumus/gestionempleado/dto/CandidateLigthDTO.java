@@ -31,7 +31,10 @@ public class CandidateLigthDTO  implements Serializable{
 	
 	private String dni;
 	
-	private String cv;
+	
+	private boolean iscv;
+	
+	private int random;
 	
 	private Set<SkillDTO> skills;
 	
@@ -39,18 +42,33 @@ public class CandidateLigthDTO  implements Serializable{
 	
 
 	/**
-	 * @return the cv
+	 * @return the iscv
 	 */
-	public String getCv() {
-		return cv;
+	public boolean isIscv() {
+		return iscv;
 	}
 
 	/**
-	 * @param cv the cv to set
+	 * @param iscv the iscv to set
 	 */
-	public void setCv(String cv) {
-		this.cv = cv;
+	public void setIscv(boolean iscv) {
+		this.iscv = iscv;
 	}
+
+	/**
+	 * @return the random
+	 */
+	public int getRandom() {
+		return random;
+	}
+
+	/**
+	 * @param random the random to set
+	 */
+	public void setRandom(int random) {
+		this.random = random;
+	}
+
 
 	/**
 	 * @return the skills

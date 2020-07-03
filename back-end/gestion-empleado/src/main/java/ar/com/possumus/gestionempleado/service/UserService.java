@@ -3,6 +3,7 @@
  */
 package ar.com.possumus.gestionempleado.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.com.possumus.gestionempleado.entity.Rol;
+import ar.com.possumus.gestionempleado.repository.RolRepository;
 import ar.com.possumus.gestionempleado.repository.UserRepository;
 
 /**
@@ -30,6 +33,9 @@ public class UserService implements UserDetailsService{
 	private final Logger serviceLog = LoggerFactory.getLogger(UserService.class);	  
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private RolRepository rolrepo;
+	
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -55,5 +61,47 @@ public class UserService implements UserDetailsService{
 	public ar.com.possumus.gestionempleado.entity.User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
+
+
+	public List<ar.com.possumus.gestionempleado.entity.User> findALL() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
+	}
+
+
+	public void delete(Long idUsuario) {
+		userRepository.deleteById(idUsuario);
+		
+	}
+
+
+	public void save(ar.com.possumus.gestionempleado.entity.User user) {
+		
+		user.setEnabled(true);
+		List<Rol> roles= rolrepo.findAll();
+		user.setRoles(roles);
+		userRepository.save(user);
+		
+	}
+
+
+	public void enable(Long idUsuario) {
+		ar.com.possumus.gestionempleado.entity.User user = userRepository.findById(idUsuario).get();
+		user.setEnabled(true);
+		userRepository.save(user);
+		
+	}
+
+
+	public void disable(Long idUsuario) {
+		ar.com.possumus.gestionempleado.entity.User user = userRepository.findById(idUsuario).get();
+		user.setEnabled(false);
+		userRepository.save(user);
+		
+	}
+
+
+
+
 
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,30 +44,33 @@ public class CandidateController {
 
 	@PostMapping
 	public CandidateDTO saveCandidate(@RequestBody CandidateDTO candite) {
-
 		return service.save(null, candite);
-
 	}
 
 	@PutMapping
 	public CandidateDTO updateCandidate(Long id, @RequestBody CandidateDTO candite) {
-
 		return service.save(id, candite);
-
 	}
+
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getCandidate(@PathVariable Long id) throws Exception {
 		return new ResponseEntity<CandidateDTO>(service.getCandidate(id), HttpStatus.OK);
 
 	}
+	@DeleteMapping("/{id}")
+	public void deleteCandidate(@PathVariable Long id) throws Exception {
+		service.delete(id);
+
+	}
 
 	@PostMapping("/file/{idCandidato}")
 	public ResponseEntity<String> handleFileUpload(@PathVariable("idCandidato") Long idCandidato,
 			@RequestParam("file") MultipartFile file) {
-
 		return ResponseEntity.status(HttpStatus.OK).body(service.savePDF(idCandidato, file));
 	}
+	
+
 	
 	@GetMapping("/file/{idCandidato}")
 	public ResponseEntity<byte[]> handleFileDowload(@PathVariable("idCandidato") Long idCandidato) throws UnsupportedEncodingException {

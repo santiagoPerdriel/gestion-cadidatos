@@ -43,6 +43,8 @@ public class Candidate implements Serializable {
 	@Lob
 	private String cv;
 	
+	private boolean iscv;
+	
 	@OneToMany( cascade = CascadeType.ALL)
 	@JoinColumn(referencedColumnName = "id", name = "candidate_id")
 	private Set<Skill> skills;
@@ -66,6 +68,20 @@ public class Candidate implements Serializable {
 	
 	
 	
+
+	/**
+	 * @return the iscv
+	 */
+	public boolean isIscv() {
+		return iscv;
+	}
+
+	/**
+	 * @param iscv the iscv to set
+	 */
+	public void setIscv(boolean iscv) {
+		this.iscv = iscv;
+	}
 
 	/**
 	 * @return the dni
