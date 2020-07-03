@@ -1,9 +1,9 @@
-FROM maven:3.5-jdk-8-alpine
-ADD ./ .
-RUN rm -Rf target && \
-    mvn clean package -Pprod -DskipTests
+#FROM maven:3.5-jdk-8-alpine
+#ADD ./ .
+#RUN rm -Rf target && \
+#    mvn clean package -Pprod -DskipTests
     
-RUN mv target/*.jar /gestion.war
+#RUN mv target/*.jar /gestion.war
 
 FROM maven:3.5-jdk-8-alpine
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
